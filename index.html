@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Merger Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Video Merger Tool</h1>
+        <p class="description">Upload two videos to merge them vertically (top and bottom)</p>
+        
+        <div class="upload-container">
+            <div class="upload-box">
+                <h3>Top Video</h3>
+                <input type="file" id="top-video-input" accept="video/*" class="file-input">
+                <label for="top-video-input" class="file-label">Choose Top Video</label>
+                <div class="preview">
+                    <video id="top-video-preview" controls></video>
+                </div>
+            </div>
+            
+            <div class="upload-box">
+                <h3>Bottom Video</h3>
+                <input type="file" id="bottom-video-input" accept="video/*" class="file-input">
+                <label for="bottom-video-input" class="file-label">Choose Bottom Video</label>
+                <div class="preview">
+                    <video id="bottom-video-preview" controls></video>
+                </div>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button id="merge-btn" disabled>Merge Videos</button>
+            <div class="progress-container" id="progress-container" style="display: none;">
+                <div class="progress-bar">
+                    <div id="progress-bar-fill"></div>
+                </div>
+                <div class="progress-text" id="progress-text">Preparing videos...</div>
+            </div>
+        </div>
+        
+        <div class="result" id="result" style="display: none;">
+            <h3>Merged Video</h3>
+            <div class="preview">
+                <video id="merged-video-preview" controls></video>
+            </div>
+            <a id="download-link" class="download-btn" download="merged-video.mp4">Download Merged Video</a>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Note: Both videos should have the same length, resolution and aspect ratio for best results.</p>
+    </div>
+    
+    <!-- FFmpeg-WASM v0.9.8 (more browser compatible version) -->
+    <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.9.8/dist/ffmpeg.min.js"></script>
+    <script>
+        if (!crossOriginIsolated) {
+            document.body.innerHTML = '<div style="text-align:center;padding:20px;">' +
+            '<h2>Browser Configuration Required</h2>' +
+            '<p>This app requires special browser settings to work correctly.</p>' +
+            '<p>Please try using Chrome or Firefox and visit this page directly at: ' +
+            '<a href="http://localhost:8001">http://localhost:8001</a></p>' +
+            '</div>';
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
