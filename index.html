@@ -9,11 +9,11 @@
 <body>
     <div class="container">
         <h1>Video Merger Tool</h1>
-        <p class="description">Upload two videos to merge them vertically (top and bottom)</p>
+        <p class="description">Upload two videos to merge them vertically (color on top and mask on bottom)</p>
         
         <div class="upload-container">
             <div class="upload-box">
-                <h3>Top Video</h3>
+                <h3>Top Video (Color)</h3>
                 <input type="file" id="top-video-input" accept="video/*" class="file-input">
                 <label for="top-video-input" class="file-label">Choose Top Video</label>
                 <div class="preview">
@@ -22,7 +22,7 @@
             </div>
             
             <div class="upload-box">
-                <h3>Bottom Video</h3>
+                <h3>Bottom Video (Mask)</h3>
                 <input type="file" id="bottom-video-input" accept="video/*" class="file-input">
                 <label for="bottom-video-input" class="file-label">Choose Bottom Video</label>
                 <div class="preview">
@@ -37,7 +37,7 @@
                 <div class="progress-bar">
                     <div id="progress-bar-fill"></div>
                 </div>
-                <div class="progress-text" id="progress-text">Preparing videos...</div>
+                <div class="progress-text" id="progress-text">Processing...</div>
             </div>
         </div>
         
@@ -48,24 +48,17 @@
             </div>
             <a id="download-link" class="download-btn" download="merged-video.mp4">Download Merged Video</a>
         </div>
+        
+        <!-- Hidden canvas for video processing -->
+        <canvas id="processing-canvas" style="display:none;"></canvas>
     </div>
     
     <div class="footer">
         <p>Note: Both videos should have the same length, resolution and aspect ratio for best results.</p>
     </div>
     
-    <!-- FFmpeg-WASM v0.9.8 (more browser compatible version) -->
-    <script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.9.8/dist/ffmpeg.min.js"></script>
-    <script>
-        if (!crossOriginIsolated) {
-            document.body.innerHTML = '<div style="text-align:center;padding:20px;">' +
-            '<h2>Browser Configuration Required</h2>' +
-            '<p>This app requires special browser settings to work correctly.</p>' +
-            '<p>Please try using Chrome or Firefox and visit this page directly at: ' +
-            '<a href="http://localhost:8001">http://localhost:8001</a></p>' +
-            '</div>';
-        }
-    </script>
+    <!-- MediaRecorder polyfill for better browser support -->
+    <script src="https://unpkg.com/webm-writer@0.2.0/dist/webm-writer.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
